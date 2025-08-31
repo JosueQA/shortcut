@@ -1,0 +1,21 @@
+package org.example.model.util;
+import java.sql.*;
+
+public class Conexion {
+
+    public Connection obtenerConexion () {
+        String url = "jdbc:mysql://localhost:3306/shortcuts";
+        String user = "root";
+        String pass = "musicme";
+
+        try {
+            // Conectamos la base de datos
+            Connection conn = DriverManager.getConnection(url, user, pass);
+            return conn;
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al conectar conexion", e);
+        }
+    }
+
+
+}

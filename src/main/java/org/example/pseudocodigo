@@ -1,0 +1,24 @@
+Algoritmo sin_titulo
+
+    Leer texto_ingresado
+
+    Si texto_ingresado = "\" Entonces
+        Leer texto_ingresado2
+
+        Mientras expresion_logica Hacer
+            secuencia_de_acciones
+        Fin Mientras
+
+        Segun texto_ingresado2 Hacer
+            opcion_1:
+                secuencia_de_acciones_1
+            opcion_2:
+                secuencia_de_acciones_2
+            opcion_3:
+                secuencia_de_acciones_3
+            De Otro Modo:
+                secuencia_de_acciones_dom
+        Fin Segun
+    SiNo
+        acciones_por_falso
+    Fin Si
