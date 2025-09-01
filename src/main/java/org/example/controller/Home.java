@@ -1,8 +1,13 @@
 package org.example.controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.*;
+import javafx.scene.control.*;
+import javafx.stage.*;
+
+import java.io.IOException;
 
 public class Home {
 
@@ -12,15 +17,17 @@ public class Home {
     @FXML
     private Button btnAgregarNuevo;
 
-    // Método llamado cuando se hace clic en el botón "Agregar nuevo"
+    // Vamos a la interfaz de crear nuevos shortcut
     @FXML
-    private void onAgregarNuevoClick() {
-        String buscarTexto = txtBuscar.getText();
-        if (buscarTexto.equals("")) {
-            System.out.println("Texto no puede ser vacio");
-        } else {
-            System.out.println("Nuevo elemento a agregar: " + buscarTexto);
-        }
+    private void onAgregarNuevoClick(ActionEvent event) throws IOException {
+        // Cargar el nuevo FXML
+        Parent root = FXMLLoader.load(getClass().getResource("/view/Agregar_Shortcut.fxml"));
 
+        // Obtener el stage actual a partir del botón
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        // Cambiar la escena
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 }

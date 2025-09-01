@@ -5,22 +5,30 @@ import org.example.model.DTO.Shortcut_DTO;
 import org.example.model.util.Conexion;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class Shortcut_DAO_impl implements Shortcut_DAO {
 
     @Override
     public void crear_dao(Shortcut_DTO dto) {
 
+        // Sql para crear nuevo shortcut
         String sql = "Insert into shortcuts (titulo, texto) values (?,?)";
 
-        try (Connection conn = new Conexion().obtenerConexion();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (
+                Connection conn = new Conexion().obtenerConexion();
+                PreparedStatement stmt = conn.prepareStatement(sql) ) {
+
             stmt.setString(1, dto.getTitulo());
             stmt.setString(2, dto.getTexto());
             stmt.executeUpdate();
+
             System.out.println("Shortcuts '" + dto.getTitulo() + "' agregado exitosamente");
 
-        } catch (Exception e) {
+        } catch (SQLIntegrityConstraintViolationException e) {
+            // El Título ya existe (violación de UNIQUE)
+            throw new IllegalStateException("El título '" + dto.getTitulo() + "' ya existe", e);
+        }  catch (Exception e) {
             throw new RuntimeException("Error al crear un shortcut '" + dto.getTitulo() + "'", e);
         }
     }
@@ -82,7 +90,7 @@ public class Shortcut_DAO_impl implements Shortcut_DAO {
             throw new RuntimeException("Error al llamar el shortcut '" + titulo + "'", e);
         }
     }
-
 }
+
 
 
