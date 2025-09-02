@@ -5,47 +5,50 @@ import org.example.model.DAO.DAOImpl.*;
 import org.example.model.DAO.Shortcut_DAO;
 import org.example.model.DTO.Shortcut_DTO;
 
+import java.sql.SQLIntegrityConstraintViolationException;
+
 public class Agregar_Shorcut {
 
     @FXML
     private TextField txtTitulo;
 
     @FXML
-    private Label lblTituloCampoObligatorio;
+    private Label lblTituloError;
 
     @FXML
     private TextArea txtTexto;
 
     @FXML
-    private Label lblTextoCampoObligatorio;
-
-    @FXML
-    private Button btnGuardar;
+    private Label lblTextoError;
 
     @FXML
     private void onGuardar (){
         String titulo = txtTitulo.getText();
         String texto = txtTexto.getText();
 
-        // Si el TIULO esta vacio, muestra mensaje, y si no lo quita (si ya esta puesto)
+        // Si el TIULO esta vacio, pone visible el label de aviso, y si no, lo quita (si ya esta visible)
         if (titulo.isEmpty()){
-            lblTituloCampoObligatorio.setVisible(true);
+            lblTituloError.setVisible(true);
             return;
         } else {
-            lblTituloCampoObligatorio.setVisible(false);
+            lblTituloError.setVisible(false);
         }
-        // Si el TEXTO esta vacio, muestra mensaje, y si no lo quita (si ya esta puesto)
+        // Si el TEXTO esta vacio, pone visible el label de aviso, y si no, lo quita (si ya esta visible)
         if (texto.isEmpty()){
-            lblTextoCampoObligatorio.setVisible(true);
+            lblTextoError.setVisible(true);
             return;
         } else {
-            lblTextoCampoObligatorio.setVisible(false);
+            lblTextoError.setVisible(false);
         }
 
         Shortcut_DAO dao = new Shortcut_DAO_impl();
         Shortcut_DTO dto = new Shortcut_DTO(titulo, texto);
 
-        dao.crear_dao(dto);
+        try{
+            dao.crear_dao(dto);
+        } catch (SQLIntegrityConstraintViolationException e){
+
+        }
 
     }
 

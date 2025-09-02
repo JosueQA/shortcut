@@ -10,7 +10,9 @@ import java.util.ArrayList;
 public class Shortcut_DAO_impl implements Shortcut_DAO {
 
     @Override
-    public void crear_dao(Shortcut_DTO dto) {
+    public void crear_dao(Shortcut_DTO dto) throws SQLIntegrityConstraintViolationException {
+
+        // "throws SQLIntegrityConstraintViolationException" significa declarar error, es decir avisa que un error de ese tipo (violiacion a la integridad de la bd) puede saltar (ocurriria si el titulo se repite, ya que es UNIQUE), y quien lo llame debe usar un try-catch para capturar la excepción y hacer algo con ella (una opción distinta sería usar un catch adicional a continuación, pero necesitaremos la validacion)
 
         // Sql para crear nuevo shortcut
         String sql = "Insert into shortcuts (titulo, texto) values (?,?)";
@@ -19,16 +21,16 @@ public class Shortcut_DAO_impl implements Shortcut_DAO {
                 Connection conn = new Conexion().obtenerConexion();
                 PreparedStatement stmt = conn.prepareStatement(sql) ) {
 
+            // Asignamos el titulo y texto del dto del parametro
             stmt.setString(1, dto.getTitulo());
             stmt.setString(2, dto.getTexto());
+            // Ejecutamos comando sql
             stmt.executeUpdate();
 
             System.out.println("Shortcuts '" + dto.getTitulo() + "' agregado exitosamente");
 
-        } catch (SQLIntegrityConstraintViolationException e) {
-            // El Título ya existe (violación de UNIQUE)
-            throw new IllegalStateException("El título '" + dto.getTitulo() + "' ya existe", e);
-        }  catch (Exception e) {
+            // Si ocurre algun error..
+        } catch (Exception e) {
             throw new RuntimeException("Error al crear un shortcut '" + dto.getTitulo() + "'", e);
         }
     }

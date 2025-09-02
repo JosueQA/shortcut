@@ -9,10 +9,10 @@
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="346.0" prefWidth="399.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.Agregar_Shorcut">
     <children>
         <TextField fx:id="txtTitulo" layoutX="51.0" layoutY="38.0" promptText="Titulo" />
-        <Label fx:id="lblTituloCampoObligatorio" layoutX="214.0" layoutY="42.0" text="Campo obligatorio" visible="false" />
+        <Label fx:id="lblTituloError" layoutX="214.0" layoutY="42.0" text="Campo obligatorio" visible="false" />
 
         <TextArea fx:id="txtTexto" layoutX="52.0" layoutY="74.0" prefHeight="177.0" prefWidth="289.0" promptText="Texto" />
-        <Label fx:id="lblTextoCampoObligatorio" layoutX="51.0" layoutY="258.0" text="Campo obligatorio" visible="false" />
+        <Label fx:id="lblTextoError" layoutX="51.0" layoutY="258.0" text="Campo obligatorio" visible="false" />
 
         <Button fx:id="btnGuardar" layoutX="119.0" layoutY="295.0" mnemonicParsing="false" onAction="#onGuardar" prefHeight="25.0" prefWidth="162.0" text="Guardar" />
 
