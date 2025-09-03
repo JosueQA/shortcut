@@ -1,4 +1,4 @@
-package org.example.model.util;
+package org.example.conexion;
 import java.sql.*;
 
 public class Conexion {

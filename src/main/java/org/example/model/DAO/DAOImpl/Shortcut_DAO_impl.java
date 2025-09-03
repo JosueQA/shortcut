@@ -2,10 +2,9 @@ package org.example.model.DAO.DAOImpl;
 
 import org.example.model.DAO.Shortcut_DAO;
 import org.example.model.DTO.Shortcut_DTO;
-import org.example.model.util.Conexion;
+import org.example.conexion.Conexion;
 
 import java.sql.*;
-import java.util.ArrayList;
 
 public class Shortcut_DAO_impl implements Shortcut_DAO {
 
@@ -29,8 +28,11 @@ public class Shortcut_DAO_impl implements Shortcut_DAO {
 
             System.out.println("Shortcuts '" + dto.getTitulo() + "' agregado exitosamente");
 
-            // Si ocurre algun error..
-        } catch (Exception e) {
+            // Si ocurre un error de violiación de un constraint en sql, lo capturamos (si no colocamos esto, el siguiente catch, como atrapa en general, atrapa el error, y este no subira hasta el controller como preparamos)
+        } catch (SQLIntegrityConstraintViolationException e) {
+            throw new SQLIntegrityConstraintViolationException(e);
+        } // Si ocurre algun otro error generico..
+        catch (Exception e) {
             throw new RuntimeException("Error al crear un shortcut '" + dto.getTitulo() + "'", e);
         }
     }

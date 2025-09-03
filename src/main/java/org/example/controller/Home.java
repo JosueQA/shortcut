@@ -21,13 +21,13 @@ public class Home {
     @FXML
     private void onAgregarNuevoClick(ActionEvent event) throws IOException {
         // Cargar el nuevo FXML
-        Parent root = FXMLLoader.load(getClass().getResource("/view/Agregar_Shortcut.fxml"));
+        Parent Short_cut = FXMLLoader.load(getClass().getResource("/view/Agregar_Shortcut.fxml"));
 
         // Obtener el stage actual a partir del botón
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
         // Cambiar la escena
-        stage.setScene(new Scene(root));
+        stage.setScene(new Scene(Short_cut));
         stage.show();
     }
 }
