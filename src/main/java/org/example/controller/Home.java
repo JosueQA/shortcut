@@ -3,18 +3,13 @@ package org.example.controller;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
-import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.*;
-import org.example.util.Cambiar_scene;
+import org.example.controller.util.Agregar_presentacion_shortcuts;
+import org.example.controller.util.Cambiar_scene;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public class Home {
 
@@ -38,17 +33,8 @@ public class Home {
         Platform.runLater(() -> {
             System.out.println("Todo cargado y visible");
 
-            // Creamos el VBox
-            VBox short_cut = new VBox(10);
-            // Definimos sus atributos
-            short_cut.setPrefHeight(100);
-            short_cut.prefWidthProperty().bind(fpShortCutsContenedor.widthProperty());
-
-            // Creamos un nuevo componente
-            TextField txtBuscar = new TextField("Hello");
-
-            // Agregamos componentes como hijo del VBox
-            short_cut.getChildren().add(txtBuscar);
+            // Creamos una nueva presentacion de un shortcut
+            VBox short_cut = Agregar_presentacion_shortcuts.Agregar_presentacion_shortcuts(fpShortCutsContenedor);
 
             // Agregamos el VBox como hijo del contenedor
             fpShortCutsContenedor.getChildren().add(short_cut);

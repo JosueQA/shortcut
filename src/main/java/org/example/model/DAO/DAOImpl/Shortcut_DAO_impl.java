@@ -5,6 +5,7 @@ import org.example.model.DTO.Shortcut_DTO;
 import org.example.conexion.Conexion;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class Shortcut_DAO_impl implements Shortcut_DAO {
 
@@ -92,6 +93,32 @@ public class Shortcut_DAO_impl implements Shortcut_DAO {
 
         } catch (Exception e) {
             throw new RuntimeException("Error al llamar el shortcut '" + titulo + "'", e);
+        }
+    }
+
+    @Override
+    public void leer_todos_dao() {
+        String sql = "SELECT * from shortcuts";
+
+        try (Connection conn = new Conexion().obtenerConexion();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            ResultSet rs = stmt.executeQuery();
+            ArrayList<Shortcut_DTO> registros = new ArrayList<>();
+
+            while (rs.next()) {
+                registros.add(new Shortcut_DTO(rs.getString("titulo"), rs.getString("texto")));
+            }
+
+            /*
+                FALTA PROBAR SI ESTE CODIGO FUNCIONA
+                DEBO PASARLO AL ARCHIVO "Agregar_presentacion_shortcut E IMPLEMENTARLO EN SU METODO PRINCIPAL
+                LA IDEA AQUI ES LLAMAR A CADA REGISTRO, ALMACENARLO EN UN ARRAYLIST DE PUROS DTO
+                LA IDEA EN EL ARCHIVO DESTINO, ES LLAMAR A CADA DTO EN UN BUCLE Y CREAR UN VBOX CON SUS COMPLEMENTOS Y ESTILOS CON CADA UNO Y PROYECTARLO EN EL HOME
+            * */
+
+        } catch (Exception e) {
+            throw new RuntimeException("Error al llamar a todos los shortcut", e);
         }
     }
 }

@@ -1,16 +1,11 @@
 package org.example.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
 import org.example.model.DAO.DAOImpl.*;
 import org.example.model.DAO.Shortcut_DAO;
 import org.example.model.DTO.Shortcut_DTO;
-import org.example.util.Cambiar_scene;
+import org.example.controller.util.Cambiar_scene;
 
 import java.io.IOException;
 import java.sql.SQLIntegrityConstraintViolationException;
