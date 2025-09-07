@@ -10,6 +10,7 @@ import org.example.controller.util.Agregar_presentacion_shortcuts;
 import org.example.controller.util.Cambiar_scene;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Home {
 
@@ -31,13 +32,14 @@ public class Home {
     @FXML
     public void initialize() {
         Platform.runLater(() -> {
-            System.out.println("Todo cargado y visible");
 
             // Creamos una nueva presentacion de un shortcut
-            VBox short_cut = Agregar_presentacion_shortcuts.Agregar_presentacion_shortcuts(fpShortCutsContenedor);
+            ArrayList<VBox> presentacion_shortcuts_array = Agregar_presentacion_shortcuts.Agregar_presentacion_shortcuts(fpShortCutsContenedor);
 
-            // Agregamos el VBox como hijo del contenedor
-            fpShortCutsContenedor.getChildren().add(short_cut);
+            // En un bucle, agregamos cada VBox del array como hijo del contenedor
+            for (VBox presentacion_shortcuts : presentacion_shortcuts_array) {
+                fpShortCutsContenedor.getChildren().add(presentacion_shortcuts);
+            }
 
         });
     }

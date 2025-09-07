@@ -1,5 +1,7 @@
 package org.example.model.DTO;
 
+import javafx.scene.Node;
+
 public class Shortcut_DTO {
 
     String titulo, texto;

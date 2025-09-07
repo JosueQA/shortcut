@@ -1,37 +1,42 @@
 package org.example.controller.util;
 
-import org.example.conexion.Conexion;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
+import org.example.model.DTO.Shortcut_DTO;
+import org.example.model.DAO.DAOImpl.*;
 
+import java.util.ArrayList;
 
 
 public class Agregar_presentacion_shortcuts {
 
-    public static VBox Agregar_presentacion_shortcuts(FlowPane fpContainer) {
-        // Creamos el VBox
-        VBox presentacion_short_cut = new VBox(5);
+    public static ArrayList<VBox> Agregar_presentacion_shortcuts(FlowPane fpContainer) {
+        ArrayList<VBox> presentacion_shortcuts_array = new ArrayList<>();
+        // Traemos el array con todos los registros
+        ArrayList<Shortcut_DTO> registros = new Shortcut_DAO_impl().leer_todos_dao();
 
-        // Definimos sus estilos
-        presentacion_short_cut.setStyle(
-                "-fx-padding: 20; " +
-                        "-fx-border-width: 1px 0px 1px 0px;" +
-                        "-fx-border-color: black");
+        for (Shortcut_DTO registro : registros) {
+            // Creamos el VBox
+            VBox presentacion_shortcuts = new VBox(5);
 
-        // Definimos que su ancho sera del mismo que su contenedor
-        presentacion_short_cut.prefWidthProperty().bind(fpContainer.widthProperty());
+            // Agregamos los elementos, para esto debemos pasar un label (tenemos que convertirlo, ya que JavaFx no acepta String, solo tipos de datos heredados de "Node"
+            presentacion_shortcuts.getChildren().add(new Label(registro.getTitulo()));
+            presentacion_shortcuts.getChildren().add(new Label(registro.getTexto()));
 
-        // Creamos componentes
-        Label lblTitulo = new Label("Titulo");
-        Label lblTexto = new Label("Texto...");
+            // Definimos sus estilos
+            presentacion_shortcuts.setStyle(
+                    "-fx-padding: 20; " +
+                            "-fx-border-width: 0px 0px 1px 0px;" +
+                            "-fx-border-color: black");
+            // su ancho sera del mismo que su contenedor
+            presentacion_shortcuts.prefWidthProperty().bind(fpContainer.widthProperty());
 
-        // Agregamos los componentes a la presentacion del shorcut
-        presentacion_short_cut.getChildren().add(lblTitulo);
-        presentacion_short_cut.getChildren().add(lblTexto);
+            // Introducimos el VBox en el arraylist
+            presentacion_shortcuts_array.add(presentacion_shortcuts);
+        }
 
-
-        return presentacion_short_cut;
+        return presentacion_shortcuts_array;
     }
 
 }

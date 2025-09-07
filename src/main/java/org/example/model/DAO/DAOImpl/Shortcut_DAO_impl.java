@@ -97,25 +97,24 @@ public class Shortcut_DAO_impl implements Shortcut_DAO {
     }
 
     @Override
-    public void leer_todos_dao() {
+    public ArrayList<Shortcut_DTO> leer_todos_dao() {
         String sql = "SELECT * from shortcuts";
 
         try (Connection conn = new Conexion().obtenerConexion();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
-
+            // Ejecutamos el SQL
             ResultSet rs = stmt.executeQuery();
+
+            // Creamos un ArrayList donde tendremos los registros que traemos de la bd
             ArrayList<Shortcut_DTO> registros = new ArrayList<>();
 
             while (rs.next()) {
+                // Ingresamos un nuevo DTO con el titulo y texto que nos da 'rs' en cada vuelta
                 registros.add(new Shortcut_DTO(rs.getString("titulo"), rs.getString("texto")));
             }
 
-            /*
-                FALTA PROBAR SI ESTE CODIGO FUNCIONA
-                DEBO PASARLO AL ARCHIVO "Agregar_presentacion_shortcut E IMPLEMENTARLO EN SU METODO PRINCIPAL
-                LA IDEA AQUI ES LLAMAR A CADA REGISTRO, ALMACENARLO EN UN ARRAYLIST DE PUROS DTO
-                LA IDEA EN EL ARCHIVO DESTINO, ES LLAMAR A CADA DTO EN UN BUCLE Y CREAR UN VBOX CON SUS COMPLEMENTOS Y ESTILOS CON CADA UNO Y PROYECTARLO EN EL HOME
-            * */
+            // Retornamos el registro
+            return registros;
 
         } catch (Exception e) {
             throw new RuntimeException("Error al llamar a todos los shortcut", e);
