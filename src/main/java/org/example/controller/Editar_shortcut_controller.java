@@ -3,8 +3,9 @@ package org.example.controller;
 import javafx.event.Event;
 import javafx.fxml.*;
 import javafx.scene.control.*;
-import org.example.controller.util.Cambiar_scene;
-import org.example.controller.util.Correcciones_titulo;
+import org.example.controller.util.Cambiar_scene_con_util;
+import org.example.controller.util.Correcciones_titulo_con_util;
+import org.example.controller.util.Guardar_shortcuts_con_util;
 import org.example.model.DAO.DAOImpl.Shortcut_DAO_impl;
 import org.example.model.DAO.Shortcut_DAO;
 import org.example.model.DTO.Shortcut_DTO;
@@ -15,6 +16,15 @@ public class Editar_shortcut_controller {
 
     @FXML
     public TextField txtTitulo;
+
+    @FXML
+    public TextArea txtTexto;
+
+    @FXML
+    public Label lblTituloError;
+
+    @FXML
+    public Label lblTextoError;
 
     // Inicializamos el Shorcut_DTO, que es el que recibira este valor, ya que trabajará sobre el
     public Shortcut_DTO dto;
@@ -30,21 +40,19 @@ public class Editar_shortcut_controller {
     @FXML
     public void onTituloIngresado(){
         // Definimos que cada titulo no tenga espacios, sino guiones bajos
-        Correcciones_titulo.Correccion_espacios_titulo(txtTitulo);
+        Correcciones_titulo_con_util.Correccion_espacios_titulo(txtTitulo);
     }
 
     @FXML
     public void initialize() {
         // Definimos el valor inicial del titulo
         txtTitulo.setText(dto.getTitulo());
+        txtTexto.setText(dto.getTexto());
     }
 
     @FXML
-    public void onGuardar(){}
-
-    @FXML
-    public void onAtras (Event event) throws IOException {
-        Cambiar_scene.cambiar_scene(event, "Home");
+    public void onGuardar(Event event) {
+        Guardar_shortcuts_con_util.Guardar_shortcuts_editados(event, txtTitulo, txtTexto, lblTituloError, lblTextoError, getDto());
     }
 
     @FXML
@@ -55,6 +63,11 @@ public class Editar_shortcut_controller {
 
         // Volvemos a la pestaña anterior
         onAtras(event);
+    }
+
+    @FXML
+    public void onAtras (Event event) throws IOException {
+        Cambiar_scene_con_util.cambiar_scene(event, "Home");
     }
 
 }

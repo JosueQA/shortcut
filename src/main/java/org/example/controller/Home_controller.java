@@ -5,9 +5,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
-import org.example.controller.util.Correcciones_titulo;
-import org.example.controller.util.Shortcut_presenter;
-import org.example.controller.util.Cambiar_scene;
+import org.example.controller.util.Cambiar_scene_con_util;
+import org.example.controller.util.Correcciones_titulo_con_util;
+import org.example.view_componentes.Shortcut_presenter;
 import javafx.scene.Node;
 import java.io.IOException;
 import java.util.List;
@@ -25,13 +25,13 @@ public class Home_controller {
 
     @FXML
     private void onTituloIngresado(){
-        Correcciones_titulo.Correccion_espacios_titulo(txtBuscar);
+        Correcciones_titulo_con_util.Correccion_espacios_titulo(txtBuscar);
     }
 
     // Vamos a la interfaz de crear nuevos shortcut
     @FXML
     private void onAgregarNuevoClick(ActionEvent event) throws IOException {
-        Cambiar_scene.cambiar_scene(event, "Agregar_Shortcut");
+        Cambiar_scene_con_util.cambiar_scene(event, "Agregar_Shortcut");
     }
 
     @FXML

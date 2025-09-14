@@ -1,4 +1,4 @@
-package org.example.controller.util;
+package org.example.view_componentes;
 
 import javafx.scene.Cursor;
 import javafx.scene.Node;
@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
+import org.example.controller.util.Cambiar_scene_con_util;
 import org.example.model.DAO.Shortcut_DAO;
 import org.example.model.DTO.Shortcut_DTO;
 import org.example.model.DAO.DAOImpl.*;
@@ -51,7 +52,7 @@ public class Shortcut_presenter {
                 if (event.getButton() == MouseButton.PRIMARY) {
                     try {
                         // Cambiamos de escena enviando el dto como parametro
-                        Cambiar_scene.cambiar_scene(event, "Editar_shortcut", dto);
+                        Cambiar_scene_con_util.cambiar_scene(event, "Editar_shortcut", dto);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }

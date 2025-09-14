@@ -39,16 +39,18 @@ public class Shortcut_DAO_impl implements Shortcut_DAO {
     }
 
     @Override
-    public void editar_dao(Shortcut_DTO dto) {
-        String sql = "UPDATE shortcuts SET TEXTO = ? WHERE TITULO = ?";
+    public void editar_dao(Shortcut_DTO dto) throws SQLIntegrityConstraintViolationException {
+        String sql = "UPDATE shortcuts SET TEXTO = ?, TITULO = ? WHERE CODIGO = ?";
 
         try (Connection conn = new Conexion().obtenerConexion();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, dto.getTexto());
             stmt.setString(2, dto.getTitulo());
+            stmt.setString(3, dto.getCodigo());
             stmt.executeUpdate();
-            System.out.println("Shortcuts '" + dto.getTitulo() + "' editado exitosamente");
 
+        } catch (SQLIntegrityConstraintViolationException e) {
+            throw new SQLIntegrityConstraintViolationException(e);
         } catch (Exception e) {
             throw new RuntimeException("Error al editar el shortcut '" + dto.getTitulo() + "'", e);
         }

@@ -10,7 +10,7 @@ public interface Shortcut_DAO {
     Shortcut_DTO leer_dao(String titulo);
     ArrayList<Shortcut_DTO> leer_todos_dao();
     void crear_dao(Shortcut_DTO dto) throws SQLIntegrityConstraintViolationException;
-    void editar_dao(Shortcut_DTO dto);
+    void editar_dao(Shortcut_DTO dto) throws SQLIntegrityConstraintViolationException;
     void eliminar_dao(String titulo);
 
 }
