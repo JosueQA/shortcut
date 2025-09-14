@@ -10,7 +10,7 @@ import org.example.controller.util.Cambiar_scene;
 import java.io.IOException;
 import java.sql.SQLIntegrityConstraintViolationException;
 
-public class Agregar_Shorcut {
+public class Agregar_Shorcut_controller {
 
     @FXML
     private TextField txtTitulo;

@@ -16,9 +16,11 @@ public class Main extends Application {
                 Objects.requireNonNull(Main.class.getResource("/view/Home.fxml"),
                         "No encuentro /view/Home.fxml en resources")
         );
-        Scene scene = new Scene(fxmlLoader.load(), 400, 300);
+        Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Shortcuts");
         stage.setScene(scene);
+        stage.sizeToScene();
+        System.out.println("Se cargo correctamente");
         stage.show();
     }
 

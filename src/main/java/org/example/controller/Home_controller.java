@@ -5,14 +5,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.VBox;
-import org.example.controller.util.Agregar_presentacion_shortcuts;
+import org.example.controller.util.Shortcut_presenter;
 import org.example.controller.util.Cambiar_scene;
-
+import javafx.scene.Node;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
-public class Home {
+public class Home_controller {
 
     @FXML
     private TextField txtBuscar;
@@ -34,12 +33,13 @@ public class Home {
         Platform.runLater(() -> {
 
             // Creamos una nueva presentacion de un shortcut
-            ArrayList<VBox> presentacion_shortcuts_array = Agregar_presentacion_shortcuts.Agregar_presentacion_shortcuts(fpShortCutsContenedor);
+            List<Node> presentacion_shortcuts_array = Shortcut_presenter.Shortcut_presenter(fpShortCutsContenedor);
 
             // En un bucle, agregamos cada VBox del array como hijo del contenedor
-            for (VBox presentacion_shortcuts : presentacion_shortcuts_array) {
-                fpShortCutsContenedor.getChildren().add(presentacion_shortcuts);
+            for (Node presentacion_shortcuts : presentacion_shortcuts_array) {
+                fpShortCutsContenedor.getChildren().add((javafx.scene.Node) presentacion_shortcuts);
             }
+
 
         });
     }

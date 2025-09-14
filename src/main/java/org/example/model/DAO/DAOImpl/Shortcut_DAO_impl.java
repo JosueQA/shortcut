@@ -55,27 +55,24 @@ public class Shortcut_DAO_impl implements Shortcut_DAO {
     }
 
     @Override
-    public void eliminar_dao(String titulo) {
-        String sql = "DELETE from shortcuts WHERE TITULO = ?";
+    public void eliminar_dao(String codigo) {
+        String sql = "DELETE from shortcuts WHERE codigo = ?";
 
         try (Connection conn = new Conexion().obtenerConexion();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, titulo);
+            stmt.setString(1, codigo);
             stmt.executeUpdate();
 
-            System.out.println("Shortcuts '" + titulo + "' borrado exitosamente");
+            System.out.println("Shortcuts '" + codigo + "' borrado exitosamente");
 
         } catch (Exception e) {
-            throw new RuntimeException("Error al borrar el shortcut '" + titulo + "'", e);
+            throw new RuntimeException("Error al borrar el shortcut con codigo: '" + codigo + "'", e);
         }
     }
 
     @Override
-    public void leer_dao(String titulo) {
+    public Shortcut_DTO leer_dao(String titulo) {
         String sql = "SELECT * from shortcuts WHERE TITULO = ?";
-
-        String tituloBusqueda = "";
-        String texto = "";
 
         try (Connection conn = new Conexion().obtenerConexion();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -83,13 +80,18 @@ public class Shortcut_DAO_impl implements Shortcut_DAO {
             stmt.setString(1, titulo);
             ResultSet rs = stmt.executeQuery();
 
+            // Declaramos el shortcut que recibira la informacion
+            Shortcut_DTO dto = null;
+
             while (rs.next()) {
-                tituloBusqueda = rs.getString("titulo");
-                texto = rs.getString("texto");
+                // Inicializamos el shortcut
+                dto = new Shortcut_DTO(
+                        rs.getString("titulo"),
+                        rs.getString("texto"),
+                        rs.getString("codigo"));
             }
 
-            System.out.println("Titulo: '" + tituloBusqueda + "'");
-            System.out.println("Texto: '" + texto + "'");
+            return dto;
 
         } catch (Exception e) {
             throw new RuntimeException("Error al llamar el shortcut '" + titulo + "'", e);
