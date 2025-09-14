@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
+import org.example.controller.util.Correcciones_titulo;
 import org.example.controller.util.Shortcut_presenter;
 import org.example.controller.util.Cambiar_scene;
 import javafx.scene.Node;
@@ -21,6 +22,11 @@ public class Home_controller {
 
     @FXML
     private FlowPane fpShortCutsContenedor;
+
+    @FXML
+    private void onTituloIngresado(){
+        Correcciones_titulo.Correccion_espacios_titulo(txtBuscar);
+    }
 
     // Vamos a la interfaz de crear nuevos shortcut
     @FXML
@@ -39,7 +45,6 @@ public class Home_controller {
             for (Node presentacion_shortcuts : presentacion_shortcuts_array) {
                 fpShortCutsContenedor.getChildren().add((javafx.scene.Node) presentacion_shortcuts);
             }
-
 
         });
     }

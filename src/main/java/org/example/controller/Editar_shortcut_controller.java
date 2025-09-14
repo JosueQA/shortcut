@@ -4,6 +4,7 @@ import javafx.event.Event;
 import javafx.fxml.*;
 import javafx.scene.control.*;
 import org.example.controller.util.Cambiar_scene;
+import org.example.controller.util.Correcciones_titulo;
 import org.example.model.DAO.DAOImpl.Shortcut_DAO_impl;
 import org.example.model.DAO.Shortcut_DAO;
 import org.example.model.DTO.Shortcut_DTO;
@@ -15,26 +16,27 @@ public class Editar_shortcut_controller {
     @FXML
     public TextField txtTitulo;
 
-
+    // Inicializamos el Shorcut_DTO, que es el que recibira este valor, ya que trabajará sobre el
     public Shortcut_DTO dto;
+    // Declaramos el constructor
     public Editar_shortcut_controller(Shortcut_DTO dto) {
     this.dto = dto;
 }
+    // Creamos el getter del dto
     public Shortcut_DTO getDto() {
         return dto;
     }
 
     @FXML
-    public void initialize() {
-        txtTitulo.setText(dto.getTitulo());
+    public void onTituloIngresado(){
+        // Definimos que cada titulo no tenga espacios, sino guiones bajos
+        Correcciones_titulo.Correccion_espacios_titulo(txtTitulo);
+    }
 
-        // LISTENER
-        txtTitulo.textProperty().addListener((obs, oldText, newText) -> {
-            if (!newText.isEmpty()) {
-                String newTextCambiado = newText.replace(" ", "_");
-                txtTitulo.setText(newTextCambiado);
-            }
-        });
+    @FXML
+    public void initialize() {
+        // Definimos el valor inicial del titulo
+        txtTitulo.setText(dto.getTitulo());
     }
 
     @FXML

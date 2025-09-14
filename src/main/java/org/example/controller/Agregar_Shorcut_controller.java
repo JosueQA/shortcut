@@ -2,6 +2,7 @@ package org.example.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import org.example.controller.util.Correcciones_titulo;
 import org.example.model.DAO.DAOImpl.*;
 import org.example.model.DAO.Shortcut_DAO;
 import org.example.model.DTO.Shortcut_DTO;
@@ -25,18 +26,21 @@ public class Agregar_Shorcut_controller {
     private Label lblTextoError;
 
     @FXML
+    private void onTituloIngresado(){
+        // Cambiamos los espacios por "_"
+        Correcciones_titulo.Correccion_espacios_titulo(txtTitulo);
+    }
+
+    @FXML
     private void onGuardar (ActionEvent event){
+
+
         String titulo = txtTitulo.getText();
         String texto = txtTexto.getText();
 
-        // Si el TIULO esta vacio, pone visible el label de aviso, y si no, lo quita (si ya esta visible)
-        if (titulo.isEmpty()){
-            lblTituloError.setText("Campo obligatorio");
-            lblTituloError.setVisible(true);
-            return;
-        } else {
-            lblTituloError.setVisible(false);
-        }
+        // Verificamos validez del titulo
+        if (!Correcciones_titulo.Validez_titulo(txtTitulo, lblTituloError)) return;
+
         // Si el TEXTO esta vacio, pone visible el label de aviso, y si no, lo quita (si ya esta visible)
         if (texto.isEmpty()){
             lblTextoError.setVisible(true);
