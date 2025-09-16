@@ -19,6 +19,7 @@ import java.util.List;
 public class Shortcut_presenter {
 
     // Definimos que devolvera una lista de tipo Node, ya que es el padre de VBox, pero es la manera correcta siendo mas flexible cambiando el tipo de componente a devolver (todos heredan de Node)
+    // Pasamos el contenedor al que pertenece solo para obtener su ancho
     public static List<javafx.scene.Node> Shortcut_presenter(FlowPane fpContainer) {
 
         List<javafx.scene.Node> presentacion_shortcuts_array = new ArrayList<>();
