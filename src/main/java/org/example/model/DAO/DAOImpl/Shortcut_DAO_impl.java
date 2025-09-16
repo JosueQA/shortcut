@@ -2,7 +2,7 @@ package org.example.model.DAO.DAOImpl;
 
 import org.example.model.DAO.Shortcut_DAO;
 import org.example.model.DTO.Shortcut_DTO;
-import org.example.conexion.Conexion;
+import org.example.util.Conexion;
 
 import java.sql.*;
 import java.util.ArrayList;

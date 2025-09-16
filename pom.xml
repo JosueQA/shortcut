@@ -26,9 +26,13 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
-            <version>${javafx.version}</version>
+            <version>23.0.1</version> <!-- usa la misma versión que los otros javafx -->
         </dependency>
-
+        <dependency>
+            <groupId>com.1stleg</groupId>
+            <artifactId>jnativehook</artifactId>
+            <version>LATEST</version>
+        </dependency>
         <!-- MySQL JDBC -->
         <dependency>
             <groupId>mysql</groupId>
@@ -48,8 +52,6 @@
                     <mainClass>org.example.Main</mainClass>
 
                     <launcher>app</launcher>
-                    <javafx.version>${javafx.version}</javafx.version>
-                    <components>javafx-controls,javafx-fxml</components>
                 </configuration>
             </plugin>
         </plugins>
