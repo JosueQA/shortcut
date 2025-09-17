@@ -4,6 +4,10 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
 import javafx.stage.*;
+import org.example.util.Interaccion_teclado.Detectar_teclado;
+import org.jnativehook.GlobalScreen;
+import org.jnativehook.NativeHookException;
+
 import java.util.Objects;
 
 
@@ -25,6 +29,18 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+
+        try {
+            // Registrar el hook global
+            GlobalScreen.registerNativeHook();
+        } catch (NativeHookException ex) {
+            System.err.println("No se pudo registrar el hook: " + ex.getMessage());
+            System.exit(1);
+        }
+
+        // Agregar nuestro listener al teclado
+        GlobalScreen.addNativeKeyListener(new Detectar_teclado());
+
         launch();
     }
 }
