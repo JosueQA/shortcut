@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
 import javafx.stage.*;
+import org.example.controller.util.Mostrar_ventana;
 import org.example.util.Interaccion_teclado.Detectar_teclado;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
@@ -15,23 +16,13 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        // Debe existir: src/main/resources/view/Home.fxml
-        FXMLLoader fxmlLoader = new FXMLLoader(
-                Objects.requireNonNull(Main.class.getResource("/view/Home.fxml"),
-                        "No encuentro /view/Home.fxml en resources")
-        );
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Shortcuts");
-        stage.setScene(scene);
-        stage.sizeToScene();
-        System.out.println("Se cargo correctamente");
-        stage.show();
+        // El parametro stage es propio del metodo, y "launch()" de javafx lo envia
+        Mostrar_ventana.mostrar_ventana(stage, "home", "Menu principal");
     }
 
     public static void main(String[] args) {
-
         try {
-            // Registrar el hook global
+            // Registrar el hook global para luego agregar la deteccion por el teclado
             GlobalScreen.registerNativeHook();
         } catch (NativeHookException ex) {
             System.err.println("No se pudo registrar el hook: " + ex.getMessage());
@@ -41,6 +32,7 @@ public class Main extends Application {
         // Agregar nuestro listener al teclado
         GlobalScreen.addNativeKeyListener(new Detectar_teclado());
 
+        // Javafx arranca su motor grafico, y podemos ver el main
         launch();
     }
 }

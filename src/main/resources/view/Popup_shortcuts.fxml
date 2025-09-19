@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.FlowPane?>
+
+<ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefWidth="328.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.Popup_shortcuts">
+   <content>
+      <FlowPane fx:id="fpShortCutsContenedor" alignment="TOP_CENTER" columnHalignment="CENTER" maxHeight="1.7976931348623157E308" prefWidth="325.0" />
+
+   </content>
+</ScrollPane>

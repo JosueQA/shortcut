@@ -1,9 +1,11 @@
 package org.example.util.Interaccion_teclado;
 
+import javafx.application.Platform;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 import org.example.model.DTO.Shortcut_DTO;
 
 import java.awt.*;
-import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
 import java.awt.event.KeyEvent;
@@ -12,35 +14,39 @@ import java.awt.event.KeyEvent;
 public class Robot_automatico {
 
     static Clipboard clipboard;
-    static Transferable contenidoAnterior;
+    static ClipboardContent content;
 
-    // Guardamos lo que había en el portapapeles
-    static void Guardar_portapapeles(){
-        clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-        contenidoAnterior = clipboard.getContents(null);
+
+    static void Intercaccion_clipboard (Shortcut_DTO dto) {
+        Platform.runLater(() -> {
+            clipboard = Clipboard.getSystemClipboard();
+            // Guardamos el contenido del historial de copiado
+            content = new ClipboardContent();
+            // Copiamos el texto del shortcut
+            content.putString(dto.getTexto());
+
+            Pegar_contenido();
+
+            // Restaurar el contenido anterior si ya habia
+            clipboard.setContent(content);
+
+        });
     }
 
-    // Restaurar el contenido anterior si ya habia
-    static void Limpiar_portapapeles(){
-        if (contenidoAnterior != null) {
-            clipboard.setContents(contenidoAnterior, null);
-        }
-    }
+    static void Pegar_contenido () {
+        Platform.runLater(() -> {
+            Robot robot = null;
+            try {
+                robot = new Robot();
+                robot.keyPress(KeyEvent.VK_CONTROL);
+                robot.keyPress(KeyEvent.VK_V);
+                robot.keyRelease(KeyEvent.VK_V);
+                robot.keyRelease(KeyEvent.VK_CONTROL);
+            } catch (AWTException e) {
+                throw new RuntimeException("Error al usar el pegado de contenido",e);
+            }
+        });
 
-    static void Copiar_contenido (String shorcut_texto) {
-        // Crear un objeto que contiene el texto a copiar
-        StringSelection seleccion = new StringSelection(shorcut_texto);
-
-        // Acceder al portapapeles y agregar el texto a copiar
-        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(seleccion, null);
-    }
-
-    static void Pegar_contenido () throws AWTException {
-        Robot robot = new Robot();
-        robot.keyPress(KeyEvent.VK_CONTROL);
-        robot.keyPress(KeyEvent.VK_V);
-        robot.keyRelease(KeyEvent.VK_V);
-        robot.keyRelease(KeyEvent.VK_CONTROL);
     }
 
 }
