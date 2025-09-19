@@ -1,6 +1,9 @@
 package org.example.util.Interaccion_teclado;
 
 
+import org.example.model.DAO.DAOImpl.Shortcut_DAO_impl;
+import org.example.model.DAO.Shortcut_DAO;
+import org.example.model.DTO.Shortcut_DTO;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
@@ -35,15 +38,20 @@ public class Detectar_teclado implements NativeKeyListener {
         if (e.getKeyCode() == NativeKeyEvent.VC_SLASH) {
             System.out.println("¡Se presionó la tecla / !");
 
-            try {
-                Robot robot = new Robot();
-                robot.keyPress(KeyEvent.VK_CONTROL);
-                robot.keyPress(KeyEvent.VK_V);
-                robot.keyRelease(KeyEvent.VK_V);
-                robot.keyRelease(KeyEvent.VK_CONTROL);
+            // Aqui elegimos el shortcut a pegar
+            Shortcut_DAO dao = new Shortcut_DAO_impl();
+            Shortcut_DTO dto = dao.leer_dao("prueba");
 
+            // Copiamos el contenido del portapapeles
+
+            // Copiamos el texto del shortcut
+            Robot_automatico.Copiar_contenido(dto.getTexto());
+
+            // Pegamos el texto del shortcut
+            try {
+                Robot_automatico.Pegar_contenido();
             } catch (AWTException ex) {
-                throw new RuntimeException(ex);
+                throw new RuntimeException("Error al usar el pegado de contenido",ex);
             }
 
         }
