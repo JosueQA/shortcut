@@ -6,8 +6,6 @@ import javafx.scene.input.ClipboardContent;
 import org.example.model.DTO.Shortcut_DTO;
 
 import java.awt.*;
-import java.awt.datatransfer.StringSelection;
-import java.awt.datatransfer.Transferable;
 import java.awt.event.KeyEvent;
 
 // Este "Robot" sera para automatizar procesos, como pegado de contenido, entre otros
@@ -25,16 +23,9 @@ public class Robot_automatico {
             // Copiamos el texto del shortcut
             content.putString(dto.getTexto());
 
-            Pegar_contenido();
-
             // Restaurar el contenido anterior si ya habia
             clipboard.setContent(content);
 
-        });
-    }
-
-    static void Pegar_contenido () {
-        Platform.runLater(() -> {
             Robot robot = null;
             try {
                 robot = new Robot();
@@ -45,8 +36,17 @@ public class Robot_automatico {
             } catch (AWTException e) {
                 throw new RuntimeException("Error al usar el pegado de contenido",e);
             }
+
+
+        });
+    }
+
+    static void Pegar_contenido () {
+        Platform.runLater(() -> {
+
         });
 
     }
 
 }
+// Guardamos el contenido del historial de copiado
