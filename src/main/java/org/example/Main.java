@@ -1,15 +1,11 @@
 package org.example;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.*;
 import javafx.stage.*;
-import org.example.controller.util.Mostrar_ventana;
-import org.example.util.Interaccion_teclado.Detectar_teclado;
+import org.example.controller.util.Abrir_ventana_con_util;
+import org.example.util.Detectar_teclado;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
-
-import java.util.Objects;
 
 
 public class Main extends Application {
@@ -17,7 +13,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         // El parametro stage es propio del metodo, y "launch()" de javafx lo envia
-        Mostrar_ventana.mostrar_ventana(stage, "home", "Menu principal");
+        Abrir_ventana_con_util.mostrar_ventana(stage, "home", "Menu principal");
     }
 
     public static void main(String[] args) {

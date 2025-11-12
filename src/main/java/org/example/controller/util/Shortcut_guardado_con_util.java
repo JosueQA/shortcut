@@ -12,7 +12,7 @@ import org.example.model.DTO.Shortcut_DTO;
 import java.io.IOException;
 import java.sql.SQLIntegrityConstraintViolationException;
 
-public class Guardar_shortcuts_con_util {
+public class Shortcut_guardado_con_util {
 
     // Creamos el metodo para guardar shorcuts nuevos
     public static void Guardar_shortcuts_nuevo(Event event, TextField txtTitulo, TextArea txtTexto, Label lblTituloError, Label lblTextoError) {
@@ -45,7 +45,7 @@ public class Guardar_shortcuts_con_util {
             dao.crear_dao(dto);
 
             // Guardamos y regresamos al home
-            Cambiar_scene_con_util.cambiar_scene(event, "Home");
+            Cambiar_ventana_con_util.cambiar_scene(event, "Home");
 
         } catch (SQLIntegrityConstraintViolationException e){
             lblTituloError.setText("Este titulo ya existe, intenta con otro");
@@ -93,7 +93,7 @@ public class Guardar_shortcuts_con_util {
             dao.editar_dao(dto);
 
             // Guardamos y regresamos al home
-            Cambiar_scene_con_util.cambiar_scene(event, "Home");
+            Cambiar_ventana_con_util.cambiar_scene(event, "Home");
 
         } catch (SQLIntegrityConstraintViolationException e){
             lblTituloError.setText("Este titulo ya existe, intenta con otro");

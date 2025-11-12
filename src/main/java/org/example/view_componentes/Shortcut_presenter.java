@@ -4,9 +4,8 @@ import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
-import org.example.controller.util.Cambiar_scene_con_util;
+import org.example.controller.util.Cambiar_ventana_con_util;
 import org.example.model.DAO.Shortcut_DAO;
 import org.example.model.DTO.Shortcut_DTO;
 import org.example.model.DAO.DAOImpl.*;
@@ -18,9 +17,14 @@ import java.util.List;
 
 public class Shortcut_presenter {
 
+    // Cantidad de shortcuts como VBOX
+    public static int presentacion_shortcuts_array_cantidad = 0;
+    // Altura de 1 shortcut como VBOX
+    public static double presentacion_shortcuts_array_altura = 0.00;
+
     // Definimos que devolvera una lista de tipo Node, ya que es el padre de VBox, pero es la manera correcta siendo mas flexible cambiando el tipo de componente a devolver (todos heredan de Node)
-    // Pasamos el contenedor al que pertenece solo para obtener su ancho
-    public static List<javafx.scene.Node> Shortcut_presenter(FlowPane fpContainer) {
+    // PARAMERTO: Pasamos el contenedor al que pertenece solo para obtener su ancho
+    public static List<javafx.scene.Node> Shortcut_presenter(Node fpContainer) {
 
         List<javafx.scene.Node> presentacion_shortcuts_array = new ArrayList<>();
 
@@ -53,7 +57,7 @@ public class Shortcut_presenter {
                 if (event.getButton() == MouseButton.PRIMARY) {
                     try {
                         // Cambiamos de escena enviando el dto como parametro
-                        Cambiar_scene_con_util.cambiar_scene(event, "Editar_shortcut", dto);
+                        Cambiar_ventana_con_util.cambiar_scene(event, "Editar_shortcut", dto);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
@@ -61,12 +65,18 @@ public class Shortcut_presenter {
             });
 
             // Ancho igual al contenedor
-            presentacion_shortcuts.prefWidthProperty().bind(fpContainer.widthProperty());
+            presentacion_shortcuts.prefWidthProperty().bind(fpContainer.getScene().widthProperty());
 
             // Guardamos como Node
             presentacion_shortcuts_array.add((Node) presentacion_shortcuts);
-        }
 
+            // Sumamos 1 a la cantidad total de height existentes ---------------------------------------
+            presentacion_shortcuts_array_cantidad++;
+        }
+        // Calculamos la altura de 1 height para conocer la altura de cada uno ----------------------
+        presentacion_shortcuts_array_altura = ((VBox) presentacion_shortcuts_array.get(0)).getHeight();
+
+        // Array de stodos los ahortcuts existentes como VBOX cada uno
         return presentacion_shortcuts_array;
     }
 

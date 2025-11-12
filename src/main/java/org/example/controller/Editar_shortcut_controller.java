@@ -3,9 +3,9 @@ package org.example.controller;
 import javafx.event.Event;
 import javafx.fxml.*;
 import javafx.scene.control.*;
-import org.example.controller.util.Cambiar_scene_con_util;
+import org.example.controller.util.Cambiar_ventana_con_util;
 import org.example.controller.util.Correcciones_titulo_con_util;
-import org.example.controller.util.Guardar_shortcuts_con_util;
+import org.example.controller.util.Shortcut_guardado_con_util;
 import org.example.model.DAO.DAOImpl.Shortcut_DAO_impl;
 import org.example.model.DAO.Shortcut_DAO;
 import org.example.model.DTO.Shortcut_DTO;
@@ -52,7 +52,7 @@ public class Editar_shortcut_controller {
 
     @FXML
     public void onGuardar(Event event) {
-        Guardar_shortcuts_con_util.Guardar_shortcuts_editados(event, txtTitulo, txtTexto, lblTituloError, lblTextoError, getDto());
+        Shortcut_guardado_con_util.Guardar_shortcuts_editados(event, txtTitulo, txtTexto, lblTituloError, lblTextoError, getDto());
     }
 
     @FXML
@@ -67,7 +67,7 @@ public class Editar_shortcut_controller {
 
     @FXML
     public void onAtras (Event event) throws IOException {
-        Cambiar_scene_con_util.cambiar_scene(event, "Home");
+        Cambiar_ventana_con_util.cambiar_scene(event, "Home");
     }
 
 }
