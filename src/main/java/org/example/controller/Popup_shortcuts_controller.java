@@ -4,8 +4,11 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
+import org.example.controller.util.Correcciones_titulo_con_util;
+import org.example.controller.util.Shortcut_presenter_filtro_con_util;
 import org.example.view_componentes.Shortcut_presenter;
 import java.util.List;
 
@@ -18,6 +21,9 @@ public class Popup_shortcuts_controller {
 
     @FXML
     private FlowPane fpShortCutsContenedor;
+
+    @FXML
+    private TextField txtBuscar;
 
     @FXML
     public void initialize() {
@@ -55,4 +61,13 @@ public class Popup_shortcuts_controller {
 
     }
 
+    @FXML
+    private void onTituloIngresado(){
+        // Cambiamos los espacios por "_"
+        Correcciones_titulo_con_util.Correccion_espacios_titulo(txtBuscar);
+
+        // Filtramos los shortcuts a aparecer usando el buscador
+        Shortcut_presenter_filtro_con_util.filtro_busqueda(txtBuscar.getText());
+    }
 }
+

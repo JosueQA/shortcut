@@ -3,8 +3,22 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.FlowPane?>
 
-<ScrollPane fx:id="spShortCutsScrollContenedor" fitToWidth="true" hbarPolicy="NEVER"  minHeight="81.33" prefWidth="328.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.Popup_shortcuts_controller">
-      <FlowPane fx:id="fpShortCutsContenedor" alignment="TOP_CENTER" columnHalignment="CENTER" prefWidth="325.0">
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TextField?>
+<VBox xmlns="http://javafx.com/javafx/24.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.example.controller.Popup_shortcuts_controller"
+      spacing="10"
+      prefWidth="330">
 
-      </FlowPane>
-</ScrollPane>
+      <!-- Buscador -->
+      <TextField fx:id="txtBuscar" layoutX="36.0" layoutY="35.0" promptText="buscar" onKeyTyped="#onTituloIngresado"/>
+
+      <ScrollPane fx:id="spShortCutsScrollContenedor" fitToWidth="true" hbarPolicy="NEVER"  minHeight="81.33" prefWidth="328.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" >
+            <content>
+            <FlowPane fx:id="fpShortCutsContenedor" alignment="TOP_CENTER" columnHalignment="CENTER" prefWidth="325.0">
+
+            </FlowPane>
+            </content>
+      </ScrollPane>
+</VBox>
